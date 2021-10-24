@@ -34,4 +34,9 @@ install(TARGETS
   kinect_ros2
   DESTINATION lib/${PROJECT_NAME})
 
+  install(
+    DIRECTORY launch
+    DESTINATION share/${PROJECT_NAME}
+  )
+
 ament_package()
