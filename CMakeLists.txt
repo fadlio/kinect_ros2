@@ -20,6 +20,7 @@ find_package(sensor_msgs REQUIRED)
 
 find_package(cv_bridge REQUIRED)
 find_package(image_transport REQUIRED)
+find_package(depth_image_proc REQUIRED)
 find_package(camera_info_manager REQUIRED)
 
 add_library(kinect_ros2_component SHARED src/kinect_ros2_component.cpp)

@@ -1,9 +1,7 @@
 import os
 
 import launch_ros
-from launch_ros.actions import ComposableNodeContainer
 from launch_ros.actions.node import Node
-from launch_ros.descriptions import ComposableNode
 
 from launch.actions.declare_launch_argument import DeclareLaunchArgument
 from launch.launch_description import LaunchDescription
@@ -23,30 +21,11 @@ def generate_launch_description():
                 default_value=default_rviz_config_path,
                 description="Absolute path to rviz config file",
             ),
-            ComposableNodeContainer(
-                name="kinect",
+            Node(
+                package="kinect_ros2",
+                executable="kinect_ros2_node",
+                name="kinect_ros2",
                 namespace="kinect",
-                package="rclcpp_components",
-                executable="component_container",
-                composable_node_descriptions=[
-                    ComposableNode(
-                        package="kinect_ros2",
-                        plugin="kinect_ros2::KinectRosComponent",
-                        name="kinect_component",
-                        namespace="kinect"
-                    ),
-                    ComposableNode(
-                        package="depth_image_proc",
-                        plugin="depth_image_proc::PointCloudXyzNode",
-                        name="point_cloud_xyz_node",
-                        namespace="kinect",
-                        remappings=[
-                            ("image_rect", "depth/image_raw"),
-                            ("camera_info", "depth/camera_info"),
-                        ],
-                    ),
-                ],
-                output="screen",
             ),
             Node(
                 package="rviz2",
