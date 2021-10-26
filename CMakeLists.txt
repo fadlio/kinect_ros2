@@ -56,7 +56,7 @@ install(TARGETS
   DESTINATION lib/${PROJECT_NAME})
 
 install(
-  DIRECTORY cfg launch
+  DIRECTORY cfg launch rviz
   DESTINATION share/${PROJECT_NAME}
 )
 
