@@ -10,6 +10,7 @@ include_directories(include)
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp_components REQUIRED)
+find_package(ament_index_cpp REQUIRED)
 find_package(rclcpp REQUIRED)
 # find_package(Threads REQUIRED)
 
@@ -32,6 +33,8 @@ ament_target_dependencies(kinect_ros2_component
   std_msgs
   cv_bridge
   camera_info_manager
+  rclcpp_components
+  ament_index_cpp
   image_transport
   OpenCV)
 target_link_libraries(kinect_ros2_component
