@@ -1,4 +1,5 @@
 #include "kinect_ros2/kinect_ros2_component.hpp"
+#include <ament_index_cpp/get_package_share_directory.hpp>
 
 using namespace std::chrono_literals;
 
@@ -17,15 +18,17 @@ KinectRosComponent::KinectRosComponent(const rclcpp::NodeOptions & options)
 : Node("kinect_ros2", options)
 {
   timer_ = create_wall_timer(1ms, std::bind(&KinectRosComponent::timer_callback, this));
+  
+  std::string pkg_share = ament_index_cpp::get_package_share_directory("kinect_ros2");
 
   //todo: use parameters
   depth_info_manager_ = std::make_shared<camera_info_manager::CameraInfoManager>(
     this, "kinect",
-    "file:///home/lio/tcc_ws/install/kinect_ros2/share/kinect_ros2/cfg/calibration_depth.yaml");
+    "file://" + pkg_share + "/cfg/calibration_depth.yaml");
 
   rgb_info_manager_ = std::make_shared<camera_info_manager::CameraInfoManager>(
     this, "kinect",
-    "file:///home/lio/tcc_ws/install/kinect_ros2/share/kinect_ros2/cfg/calibration_rgb.yaml");
+    "file://" + pkg_share + "/cfg/calibration_rgb.yaml");
 
   rgb_info_ = rgb_info_manager_->getCameraInfo();
   rgb_info_.header.frame_id = "kinect_rgb";
