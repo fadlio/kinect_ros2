@@ -59,7 +59,7 @@ install(TARGETS
   DESTINATION lib/${PROJECT_NAME})
 
 install(
-  DIRECTORY cfg launch rviz
+  DIRECTORY cfg launch rviz description
   DESTINATION share/${PROJECT_NAME}
 )
 

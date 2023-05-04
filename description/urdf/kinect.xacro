@@ -1,0 +1,19 @@
+<robot name="kinect">
+		<link name="kinect_base"/>
+
+        <link name="kinect_camera"/>
+
+		<joint name="base_link_to_kinect" type="fixed">
+			<parent link="kinect_base"/>
+			<child link="kinect_camera"/>
+			<origin xyz="-0.0065 0 0.139" rpy="0 0 0"/>
+		</joint>
+
+		<link name="kinect_camera_optical"/>
+
+		<joint name="kinect_camera_to_optical" type="fixed">
+			<parent link="kinect_camera"/>
+			<child link="kinect_camera_optical"/>
+			<origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
+		</joint>
+</robot>        

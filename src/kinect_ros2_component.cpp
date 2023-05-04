@@ -31,9 +31,9 @@ KinectRosComponent::KinectRosComponent(const rclcpp::NodeOptions & options)
     "file://" + pkg_share + "/cfg/calibration_rgb.yaml");
 
   rgb_info_ = rgb_info_manager_->getCameraInfo();
-  rgb_info_.header.frame_id = "kinect_rgb";
+  rgb_info_.header.frame_id = "kinect_camera_optical";
   depth_info_ = depth_info_manager_->getCameraInfo();
-  depth_info_.header.frame_id = "kinect_depth";
+  depth_info_.header.frame_id = "kinect_camera_optical";
 
   depth_pub_ = image_transport::create_camera_publisher(this, "depth/image_raw");
   rgb_pub_ = image_transport::create_camera_publisher(this, "image_raw");
@@ -138,7 +138,7 @@ void KinectRosComponent::timer_callback()
 {
   freenect_process_events(fn_ctx_);
   auto header = std_msgs::msg::Header();
-  header.frame_id = "kinect_depth";
+  header.frame_id = "kinect_camera_optical";
 
   auto stamp = now();
   header.stamp = stamp;
